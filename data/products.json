@@ -4,41 +4,223 @@
     "name": "Wireless Bluetooth Earbuds",
     "price": 2499,
     "image": "assets/products/earbuds.png",
-    "category": "audio"
+    "category": "audio",
+    "description": "Compact wireless earbuds with high-fidelity sound, deep bass, and a comfortable in-ear fit. Includes a charging case offering up to 20 hours of playback and Bluetooth 5.2 connectivity."
   },
   {
     "id": "P-203",
     "name": "Smartwatch Series 5",
     "price": 8999,
     "image": "assets/products/smartwatch.png",
-    "category": "wearables"
+    "category": "electronics",
+    "description": "Track your fitness, heart rate, and sleep with this stylish smartwatch. Features customizable watch faces, call and message notifications, and water resistance up to 50 meters."
   },
   {
     "id": "P-305",
     "name": "Phone Case (Black Matte)",
     "price": 399,
     "image": "assets/products/phonecase.png",
-    "category": "accessories"
+    "category": "accessories",
+    "description": "Slim and durable black matte phone case that provides excellent grip and protection from drops and scratches. Compatible with most standard smartphone models."
   },
   {
     "id": "P-412",
     "name": "Noise Cancelling Headphones",
     "price": 7499,
     "image": "assets/products/headphones.png",
-    "category": "audio"
+    "category": "audio",
+    "description": "Over-ear noise-cancelling headphones designed for immersive listening. Features 40mm drivers, soft ear cushions, and up to 30 hours of wireless playback on a single charge."
   },
   {
     "id": "P-520",
     "name": "4K Smart TV 43\"",
     "price": 34999,
     "image": "assets/products/tv.png",
-    "category": "electronics"
+    "category": "electronics",
+    "description": "Stunning 43-inch 4K Ultra HD Smart TV with HDR10 support and built-in apps for Netflix, YouTube, and Prime Video. Includes voice control and dual-band Wi-Fi for smooth streaming."
   },
   {
     "id": "P-601",
     "name": "Gaming Mouse RGB",
     "price": 1299,
     "image": "assets/products/mouse.png",
-    "category": "accessories"
+    "category": "accessories",
+    "description": "Ergonomic gaming mouse with adjustable DPI up to 7200, RGB backlighting, and programmable buttons. Designed for precision, comfort, and long gaming sessions."
+  },
+  {
+    "id": "P-607",
+    "name": "Mechanical Keyboard RGB",
+    "price": 4599,
+    "image": "assets/products/keyboard.png",
+    "category": "accessories",
+    "description": "Tactile mechanical keyboard with hot-swappable switches, customizable RGB lighting, and durable aluminum frame ideal for gamers and typists."
+  },
+  {
+    "id": "P-610",
+    "name": "Wireless Charging Pad",
+    "price": 899,
+    "image": "assets/products/charger.png",
+    "category": "accessories",
+    "description": "Fast wireless charging pad compatible with Qi-enabled devices. Sleek aluminum design with non-slip surface and overheat protection."
+  },
+  {
+    "id": "P-615",
+    "name": "Smart LED Bulb",
+    "price": 599,
+    "image": "assets/products/smartbulb.png",
+    "category": "electronics",
+    "description": "Wi-Fi-enabled smart LED bulb controllable via app or voice assistant. Offers millions of colors, dimming options, and energy efficiency."
+  },
+  {
+    "id": "P-620",
+    "name": "Portable Bluetooth Speaker",
+    "price": 1799,
+    "image": "assets/products/speaker.png",
+    "category": "audio",
+    "description": "Water-resistant portable speaker with punchy bass, long battery life, and Bluetooth 5.0. Perfect for outdoor use."
+  },
+  {
+    "id": "P-630",
+    "name": "Smart Home Hub",
+    "price": 3999,
+    "image": "assets/products/smarthub.png",
+    "category": "electronics",
+    "description": "Central hub for managing all smart home devices with voice and app control. Supports Wi-Fi, Zigbee, and Bluetooth connectivity."
+  },
+  {
+    "id": "P-640",
+    "name": "Laptop Backpack",
+    "price": 1499,
+    "image": "assets/products/backpack.png",
+    "category": "accessories",
+    "description": "Stylish and durable laptop backpack with anti-theft design, USB charging port, and padded compartments for 15.6-inch laptops."
+  },
+  {
+    "id": "P-650",
+    "name": "Wireless Keyboard and Mouse Combo",
+    "price": 2399,
+    "image": "assets/products/keyboardmouse.png",
+    "category": "accessories",
+    "description": "Reliable wireless combo with silent keys, ergonomic design, and long battery life — ideal for office or home use."
+  },
+  {
+    "id": "P-660",
+    "name": "Smartphone Tripod Stand",
+    "price": 699,
+    "image": "assets/products/tripod.png",
+    "category": "accessories",
+    "description": "Adjustable tripod stand with Bluetooth remote shutter and 360° rotation for stable photos and videos."
+  },
+  {
+    "id": "P-670",
+    "name": "Gaming Headset with Mic",
+    "price": 2999,
+    "image": "assets/products/gamingheadset.png",
+    "category": "audio",
+    "description": "High-quality surround sound gaming headset with detachable mic, soft ear cushions, and RGB side lighting."
+  },
+  {
+    "id": "P-675",
+    "name": "Smart Fitness Band",
+    "price": 2299,
+    "image": "assets/products/fitnessband.png",
+    "category": "electronics",
+    "description": "Lightweight fitness tracker with heart rate, step, and sleep monitoring, plus waterproof design and 10-day battery life."
+  },
+  {
+    "id": "P-680",
+    "name": "Wireless Game Controller",
+    "price": 3499,
+    "image": "assets/products/gamecontroller.png",
+    "category": "accessories",
+    "description": "Bluetooth controller compatible with PC, Android, and consoles. Features dual vibration motors and ergonomic grip."
+  },
+  {
+    "id": "P-690",
+    "name": "USB-C Hub 6-in-1",
+    "price": 1999,
+    "image": "assets/products/hub.png",
+    "category": "accessories",
+    "description": "Multi-port USB-C hub featuring HDMI, USB 3.0, SD card reader, and power delivery support for laptops."
+  },
+  {
+    "id": "P-700",
+    "name": "Smart Door Lock",
+    "price": 12999,
+    "image": "assets/products/smartlock.png",
+    "category": "electronics",
+    "description": "Fingerprint and PIN-enabled smart door lock with Wi-Fi control, real-time alerts, and long-lasting battery."
+  },
+  {
+    "id": "P-710",
+    "name": "Robot Vacuum Cleaner",
+    "price": 24999,
+    "image": "assets/products/vacuum.png",
+    "category": "electronics",
+    "description": "Smart robot vacuum with laser navigation, voice control, and auto-charging. Supports scheduled cleaning."
+  },
+  {
+    "id": "P-720",
+    "name": "Wireless Security Camera",
+    "price": 4999,
+    "image": "assets/products/securitycam.png",
+    "category": "electronics",
+    "description": "1080p HD indoor/outdoor security camera with night vision, motion detection, and mobile alerts."
+  },
+  {
+    "id": "P-730",
+    "name": "Electric Kettle Stainless Steel",
+    "price": 999,
+    "image": "assets/products/kettle.png",
+    "category": "electronics",
+    "description": "Quick-boil electric kettle with automatic shutoff and 1.8L capacity, made from food-grade stainless steel."
+  },
+  {
+    "id": "P-740",
+    "name": "Wireless Charging Desk Lamp",
+    "price": 2599,
+    "image": "assets/products/desklamp.png",
+    "category": "accessories",
+    "description": "Adjustable LED desk lamp with built-in wireless charging pad, touch controls, and 3 brightness modes."
+  },
+  {
+    "id": "P-750",
+    "name": "Electric Toothbrush",
+    "price": 1999,
+    "image": "assets/products/toothbrush.png",
+    "category": "accessories",
+    "description": "Rechargeable electric toothbrush with smart timer, 3 brushing modes, and up to 30 days of battery life."
+  },
+  {
+    "id": "P-760",
+    "name": "Hair Dryer 1800W",
+    "price": 1699,
+    "image": "assets/products/hairdryer.png",
+    "category": "electronics",
+    "description": "Lightweight ionic hair dryer with 3 heat settings, cool shot, and noise-reduction design."
+  },
+  {
+    "id": "P-770",
+    "name": "Mini Projector 1080p",
+    "price": 12999,
+    "image": "assets/products/projector.png",
+    "category": "electronics",
+    "description": "Compact portable projector supporting Full HD input, HDMI, USB, and screen mirroring for home entertainment."
+  },
+  {
+    "id": "P-780",
+    "name": "Smart Plug Wi-Fi",
+    "price": 799,
+    "image": "assets/products/smartplug.png",
+    "category": "accessories",
+    "description": "Smart Wi-Fi plug with voice assistant support. Allows remote control and energy monitoring for any plugged-in device."
+  },
+  {
+    "id": "P-790",
+    "name": "Gaming Chair Pro",
+    "price": 14999,
+    "image": "assets/products/gamingchair.png",
+    "category": "accessories",
+    "description": "Ergonomic high-back gaming chair with adjustable armrests, lumbar support, and premium PU leather finish."
   }
 ]

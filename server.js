@@ -3,6 +3,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import * as uAuth from "./src/userAuth.js";
 import * as cart from "./src/cartService.js";
+import * as order from "./src/ordersService.js";
 import * as products from './src/productService.js'
 
 const __filename = fileURLToPath(import.meta.url);
@@ -40,7 +41,14 @@ app.get('/product', (req, res) => {
 
 app.post('/api/auth/login', uAuth.login);
 app.post('/api/auth/register', uAuth.register);
+app.post('/api/user/get', uAuth.getUserData);
+app.post('/api/user/set', uAuth.setUserData);
 app.post('/api/cart/add', cart.addToCart);
+app.post('/api/cart/remove', cart.removeFromCart);
+app.post('/api/cart/get', cart.getCart)
+app.post('/api/cart/reset', cart.resetCart)
+app.post('/api/order/add', order.addToOrder)
+app.post('/api/order/get', order.getOrders)
 app.post('/api/products', products.getAllProducts)
 
 app.get(/.*/, (req, res) => {

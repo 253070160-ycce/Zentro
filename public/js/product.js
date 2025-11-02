@@ -1,52 +1,27 @@
-const products = [
-  {
-    id: "P-101",
-    name: "Wireless Bluetooth Earbuds",
-    price: 2499,
-    description: "Enjoy crystal-clear sound with long battery life and seamless Bluetooth connectivity. Compact charging case included.",
-    image: "/images/products/earbuds.jpg",
-    category: "audio"
-  },
-  {
-    id: "P-203",
-    name: "Smartwatch Series 5",
-    price: 8999,
-    description: "Stay connected with notifications, track fitness, and monitor health in real time with a vibrant AMOLED display.",
-    image: "/images/products/smartwatch.jpg",
-    category: "wearables"
-  },
-  {
-    id: "P-305",
-    name: "Phone Case (Black Matte)",
-    price: 399,
-    description: "Sleek matte finish with drop protection and perfect fit for your device. Minimal design, maximum durability.",
-    image: "/images/products/phonecase.jpg",
-    category: "accessories"
-  },
-  {
-    id: "P-412",
-    name: "Noise Cancelling Headphones",
-    price: 7499,
-    description: "Immersive over-ear design with active noise cancellation and 30 hours of playback time.",
-    image: "/images/products/headphones.jpg",
-    category: "audio"
-  },
-  {
-    id: "P-520",
-    name: "4K Smart TV 43\"",
-    price: 34999,
-    description: "Ultra HD Smart TV with HDR10+, Dolby Audio, and all your favorite streaming apps built in.",
-    image: "/images/products/tv.jpg",
-    category: "electronics"
-  }
-];
+async function fetchProducts() {
+  try {
+    const response = await fetch("/api/products", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (!response.ok) throw new Error("Failed to fetch products");
 
+    const products = await response.json();
+    return products;
+  } catch (err) {
+    console.error("Error:", err);
+    return [];
+  }
+}
 const urlParams = new URLSearchParams(window.location.search);
 const productId = urlParams.get("id");
 
-const product = products.find(p => p.id === productId) || products[0];
-
-window.addEventListener("DOMContentLoaded", () => {
+window.addEventListener("DOMContentLoaded", async () => {
+  products = await fetchProducts();
+  const product = products.find((p) => p.id === productId);
+  if (!product) window.location.href = "/404";
   renderProduct(product);
   renderRelated(product.category, product.id);
 });
@@ -68,7 +43,9 @@ function renderProduct(p) {
         <button onclick="changeQty(1)">+</button>
       </div>
 
-      <button class="add-to-cart" onclick="addToCart('${p.id}')">Add to Cart</button>
+      <button class="add-to-cart" onclick="addToCart('${
+        p.id
+      }')">Add to Cart</button>
     </div>
   `;
 }
@@ -80,14 +57,51 @@ function changeQty(delta) {
   input.value = Math.max(1, val);
 }
 
-function addToCart(id) {
+async function addToCart(id) {
   const qty = parseInt(document.getElementById("qty").value);
-  const product = products.find(p => p.id === id);
-  alert(`Added ${qty} x "${product.name}" to cart!`);
+  const product = products.find((p) => p.id === id);
+
+  const token = localStorage.getItem("token");
+  const user = JSON.parse(localStorage.getItem("user") || "null");
+
+  if (!token || !user) {
+    alert("You need to log in to add items to your cart.");
+    window.location.href = "/login";
+    return;
+  }
+  for (let i = 1; i <= qty; i++) {
+    try {
+      const response = await fetch("/api/cart/add", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          userId: user.id,
+          productId: product.id,
+        }),
+      });
+
+      if (!response.ok) {
+        const err = await response.json();
+        throw new Error(err.error || "Failed to add to cart");
+      }
+
+      const result = await response.json();
+      console.log("Added to cart:", result);
+      alert("Product added to cart!");
+    } catch (err) {
+      console.error("Cart error:", err);
+      alert("Error adding to cart. Try again.");
+    }
+  }
 }
 
 function renderRelated(category, excludeId) {
-  const related = products.filter(p => p.category === category && p.id !== excludeId);
+  const related = products.filter(
+    (p) => p.category === category && p.id !== excludeId
+  );
   const grid = document.getElementById("relatedGrid");
 
   if (related.length === 0) {
@@ -95,7 +109,7 @@ function renderRelated(category, excludeId) {
     return;
   }
 
-  related.forEach(p => {
+  related.forEach((p) => {
     const card = document.createElement("div");
     card.classList.add("related-card");
     card.innerHTML = `
@@ -106,7 +120,7 @@ function renderRelated(category, excludeId) {
       </div>
     `;
     card.addEventListener("click", () => {
-      window.location.href = `product.html?id=${p.id}`;
+      window.location.href = `product?id=${p.id}`;
     });
     grid.appendChild(card);
   });

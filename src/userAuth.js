@@ -1,6 +1,11 @@
 import jwt from "jsonwebtoken";
 
-import { addUserIfNotExists, getUserByEmail } from "./userService.js";
+import {
+  addUserIfNotExists,
+  getUserByEmail,
+  getUserById,
+  updateUserData,
+} from "./userService.js";
 
 const JWT_SECRET = "34njewfsdufs8uewrfidjsfo";
 
@@ -16,11 +21,9 @@ export async function login(req, res) {
     return res.status(401).json({ error: "Invalid email or password" });
   }
 
-  const token = jwt.sign(
-    { id: user.id, email: user.email },
-    JWT_SECRET,
-    { expiresIn: "7d" }
-  );
+  const token = jwt.sign({ id: user.id, email: user.email }, JWT_SECRET, {
+    expiresIn: "7d",
+  });
 
   res.json({
     user: { id: user.id, email: user.email, username: user.username },
@@ -29,17 +32,16 @@ export async function login(req, res) {
 }
 
 export async function register(req, res) {
-const { email, password, username } = req.body;
-    console.log('registering: ', email, password, username);
-    try {    
+  const { email, password, username, phone, address } = req.body;
+  console.log("registering: ", email, password, username, phone, address);
+  try {
     const user = await addUserIfNotExists(req.body);
-    console.log('registered: ', user);
-    
-    return res.status(200).json({status: "OK"});
-    } catch (error) {
-        return res.status(401).json({ error: "User Already Exists" });
-    }
-    
+    console.log("registered: ", user);
+
+    return res.status(200).json({ status: "OK" });
+  } catch (error) {
+    return res.status(401).json({ error: "User Already Exists" });
+  }
 }
 
 export function authMiddleware(req) {
@@ -54,4 +56,32 @@ export function authMiddleware(req) {
   } catch (err) {
     return false;
   }
+}
+
+export async function getUserData(req, res) {
+  const { userId } = req.body;
+  if (!userId) {
+    return res.status(400).json({ error: "Missing userId" });
+  }
+
+  if (!authMiddleware(req))
+    return res.status(400).json({ error: "User Authentication Failed" });
+
+  let user = await getUserById(userId);
+
+  res.json(user);
+}
+
+export async function setUserData(req, res) {
+  const { id } = req.body;
+  if (!id) {
+    return res.status(400).json({ error: "Missing userId" });
+  }
+
+  if (!authMiddleware(req))
+    return res.status(400).json({ error: "User Authentication Failed" });
+  console.log('sdfsdf: ', req.body);
+  await updateUserData(req.body);
+
+  res.json({status: 'OK'});
 }

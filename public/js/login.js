@@ -68,7 +68,6 @@ loginForm.addEventListener("submit", async (e) => {
       throw new Error(error.error || "Login failed");
     }
 
-    // Parse server response
     const result = await response.json();
     console.log("Server Response:", result);
 
@@ -87,6 +86,8 @@ registerForm.addEventListener("submit", async (e) => {
   const username = document.getElementById("register-username").value.trim();
   const email = document.getElementById("register-email").value.trim();
   const password = document.getElementById("register-password").value.trim();
+  const phone = document.getElementById("register-phone").value.trim();
+  const address = document.getElementById("register-address").value.trim();
   const errorDiv = document.getElementById("register-error");
   errorDiv.textContent = "";
 
@@ -110,8 +111,24 @@ registerForm.addEventListener("submit", async (e) => {
     );
     return;
   }
+  if (!(/^[0-9]{10}$/.test(phone))) {
+  showError(
+      "register-phone",
+      errorDiv,
+      "Invalid Phone No."
+    );
+    return;
+  }
+  if (address.length < 3) {
+    showError(
+      "register-address",
+      errorDiv,
+      "Address must contain more than 3 characters."
+    );
+    return;
+  }
 
-const data = { username, email, password };
+const data = { username, email, password, phone, address };
 console.log("Register Data:", data);
 
 try {

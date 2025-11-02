@@ -11,127 +11,207 @@ tabs.forEach((tab) => {
   });
 });
 
-const defaultProfile = {
-  firstName: "John",
-  lastName: "Doe",
-  email: "john.doe@example.com",
-  phone: "+1 234 567 8900",
-};
+async function getUserData() {
+  const token = localStorage.getItem("token");
+  const user = JSON.parse(localStorage.getItem("user") || "null");
 
-function loadProfile() {
-  const data =
-    JSON.parse(localStorage.getItem("userProfile")) || defaultProfile;
-  document.getElementById("first-name").value = data.firstName;
-  document.getElementById("last-name").value = data.lastName;
+  if (!token || !user) {
+    alert("You need to log in to add items to your cart.");
+    window.location.href = "/login";
+    return;
+  }
+  try {
+    const response = await fetch("/api/user/get", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        userId: user.id,
+      }),
+    });
+
+    if (!response.ok) {
+      const err = await response.json();
+      throw new Error(err.error || "Failed to add to cart");
+    }
+
+    const result = await response.json();
+    console.log(result);
+    return result;
+  } catch (err) {
+    console.error("error:", err);
+    alert("Error. Try again.");
+  }
+}
+async function setUserData() {
+  const token = localStorage.getItem("token");
+  const user = JSON.parse(localStorage.getItem("user") || "null");
+
+  if (!token || !user) {
+    alert("You need to log in to perform this action.");
+    window.location.href = "/login";
+    return;
+  }
+
+  const nameEl = document.getElementById("name").value.trim();
+  const emailEl = document.getElementById("email").value.trim();
+  const phoneEl = document.getElementById("phone").value.trim();
+  const addressEl = document.getElementById("address").value.trim();
+
+  const payload = {
+    id: user.id,
+    name: nameEl,
+    email: emailEl,
+    phone: phoneEl,
+    address: addressEl,
+  };
+
+  try {
+    const response = await fetch("/api/user/set", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(payload),
+    });
+
+    if (!response.ok) {
+      const err = await response.json().catch(() => ({}));
+      throw new Error(err.error || "Failed to update user data");
+    }
+  } catch (err) {
+    console.error("error:", err);
+    alert("Error. Try again.");
+  }
+}
+
+async function loadProfile() {
+  const data = await getUserData();
+
+  document.getElementById("name").value = data.name;
   document.getElementById("email").value = data.email;
   document.getElementById("phone").value = data.phone;
+  document.getElementById("address").value = data.address;
 
-  document.getElementById("profile-name").textContent =
-    data.firstName + " " + data.lastName;
+  document.getElementById("profile-name").textContent = data.name;
   document.getElementById("profile-email").textContent = data.email;
 }
 
-function saveProfile() {
+async function saveProfile() {
   const profile = {
-    firstName: document.getElementById("first-name").value.trim(),
-    lastName: document.getElementById("last-name").value.trim(),
+    name: document.getElementById("name").value.trim(),
     email: document.getElementById("email").value.trim(),
     phone: document.getElementById("phone").value.trim(),
+    address: document.getElementById("address").value.trim(),
   };
-
-  if (!profile.firstName || !profile.lastName)
-    return alert("Name fields cannot be empty.");
-  if (!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(profile.email))
+  console.log(profile);
+  if (profile.name < 3)
+    return alert("Username field must have at least 3 characters.");
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(profile.email))
     return alert("Invalid email format.");
+  if (!/^[0-9]{10}$/) return alert("Invalid phone no format.");
+  if (profile.address < 3)
+    return alert("Address field must have at least 3 characters.");
 
-  localStorage.setItem("userProfile", JSON.stringify(profile));
-  loadProfile();
+  await setUserData();
   alert("Profile updated successfully!");
+  await loadProfile();
+}
+
+async function fetchProducts() {
+  try {
+    const response = await fetch("/api/products", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (!response.ok) throw new Error("Failed to fetch products");
+
+    const products = await response.json();
+    return products;
+  } catch (err) {
+    console.error("Error:", err);
+    return [];
+  }
+}
+
+async function fetchOrder() {
+  try {
+    const token = localStorage.getItem("token");
+    const user = JSON.parse(localStorage.getItem("user") || "null");
+
+    const response = await fetch("/api/order/get", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        userId: user.id,
+      }),
+    });
+    if (!response.ok) throw new Error("Failed to fetch products");
+
+    const products = await response.json().reverse();
+    
+    return products || [];
+  } catch (err) {
+    console.error("Error:", err);
+    return [];
+  }
 }
 
 document.getElementById("save-btn").addEventListener("click", saveProfile);
 document.getElementById("cancel-btn").addEventListener("click", loadProfile);
+async function renderOrders() {
+  const container = document.getElementById("order-list");
+  container.innerHTML = "Loading orders...";
 
+  try {
+    const orders = await fetchOrder();
+    const products = await fetchProducts();
 
-const recentOrders = [
-  {
-    id: "#12345",
-    status: "Delivered",
-    date: "Oct 25, 2025",
-    total: "$125.99",
-    items: 3,
-  },
-  {
-    id: "#12344",
-    status: "Shipped",
-    date: "Oct 28, 2025",
-    total: "$89.50",
-    items: 1,
-  },
-];
+    if (!orders || orders.length === 0) {
+      container.innerHTML = "<p>No orders found.</p>";
+      return;
+    }
 
-const addresses = [
-  {
-    name: "Home",
-    address: "123 Main Street, Apartment 4B, New York, NY 10001",
-    default: true,
-  },
-  {
-    name: "Office",
-    address: "456 Business Ave, Suite 200, New York, NY 10002",
-  },
-];
+    const html = orders.map((o) => {
+      const itemsList = o.items
+        .map((item) => {
+          const product = products.find((p) => p.id === item.productId);
+          return `${product ? product.name : "Unknown item"} (x${item.quantity})`;
+        })
+        .join(", ");
 
-function renderOrders() {
-  const container = document.getElementById("recent-orders");
-  container.innerHTML = recentOrders
-    .map(
-      (o) => `
+      return `
         <div class="order-card">
           <div class="order-header">
-            <span class="order-id">Order ${o.id}</span>
-            <span class="order-status status-${o.status.toLowerCase()}">${
-        o.status
-      }</span>
+            <span class="order-id">Order ${o.orderId}</span>
           </div>
           <div class="order-details">
-            <div><strong>Date:</strong> ${o.date}</div>
-            <div><strong>Total:</strong> ${o.total}</div>
-            <div><strong>Items:</strong> ${o.items}</div>
+            <div><strong>Date:</strong> ${new Date(o.date).toLocaleString()}</div>
+            <div><strong>Total:</strong> ₹${o.total}</div>
+            <div><strong>Items:</strong> ${itemsList}</div>
           </div>
         </div>
-      `
-    )
-    .join("");
-  document.getElementById("order-list").innerHTML = container.innerHTML;
+      `;
+    }).join("");
+
+    container.innerHTML = html;
+  } catch (err) {
+    console.error("Error rendering orders:", err);
+    container.innerHTML = "<p>Failed to load orders.</p>";
+  }
 }
 
-function renderAddresses() {
-  const list = document.getElementById("address-list");
-  list.innerHTML = addresses
-    .map(
-      (a) => `
-        <div class="address-card">
-          ${a.default ? '<span class="address-default">Default</span>' : ""}
-          <h3>${a.name}</h3>
-          <p>${a.address}</p>
-          <div class="address-actions">
-            <button class="btn btn-primary btn-small">Edit</button>
-            <button class="btn btn-secondary btn-small">Delete</button>
-            ${
-              !a.default
-                ? '<button class="btn btn-secondary btn-small">Set as Default</button>'
-                : ""
-            }
-          </div>
-        </div>
-      `
-    )
-    .join("");
-}
 
-window.addEventListener("DOMContentLoaded", () => {
-  loadProfile();
-  renderOrders();
-  renderAddresses();
+window.addEventListener("DOMContentLoaded", async () => {
+  await loadProfile();
+  await renderOrders();
+  console.log(await fetchOrder());
 });

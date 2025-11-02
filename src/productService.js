@@ -7,7 +7,6 @@ const __dirname = path.dirname(__filename);
 
 const PRODUCT_FILE = path.join(__dirname, "../data/products.json");
 
-// utility
 async function readProducts() {
   try {
     const data = await fs.readFile(PRODUCT_FILE, "utf8");

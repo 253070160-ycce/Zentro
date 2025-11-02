@@ -25,6 +25,43 @@ async function writeCarts(carts) {
   await fs.writeFile(CART_FILE, JSON.stringify(carts, null, 2), "utf8");
 }
 
+export async function resetCart(req, res) {
+  const { userId } = req.body;
+  if (!userId) {
+    return res.status(400).json({ error: "Missing userId" });
+  }
+  
+  if(!authMiddleware(req))
+    return res.status(400).json({ error: "User Authentication Failed" });
+  
+  let carts = await readCarts();
+  let cart = carts.find(c => c.userId === userId);
+  
+  if (cart) {
+    const cartIndex = cart.items.indexOf(cart);
+    carts.splice(cartIndex, 1);
+  }
+
+  await writeCarts(carts);
+
+  res.json({ message: "cart Removed", cart });
+}
+
+export async function getCart(req, res) {
+
+  const { userId } = req.body;
+  if (!userId ) {
+    return res.status(400).json({ error: "Missing userId" });
+  }
+  
+  if(!authMiddleware(req))
+    return res.status(400).json({ error: "User Authentication Failed" });
+  const carts = await readCarts();
+  let cart = carts.find(c => c.userId === userId) || {};
+  res.json(cart);
+  console.log('returning cart: ', cart);
+}
+
 export async function addToCart(req, res) {
   const { userId, productId } = req.body;
   if (!userId || !productId) {
@@ -52,4 +89,39 @@ export async function addToCart(req, res) {
   await writeCarts(carts);
 
   res.json({ message: "Added to cart", cart });
+}
+
+
+export async function removeFromCart(req, res) {
+  const { userId, productId } = req.body;
+  if (!userId || !productId) {
+    return res.status(400).json({ error: "Missing userId or productId" });
+  }
+  
+  if(!authMiddleware(req))
+    return res.status(400).json({ error: "User Authentication Failed" });
+  
+  let carts = await readCarts();
+  let cart = carts.find(c => c.userId === userId);
+  
+  if (!cart) {
+    cart = { userId, items: [] };
+    carts.push(cart);
+  }
+  
+  const existingItem = cart.items.find(i => i.productId === productId);
+  const itemIndex = cart.items.indexOf(existingItem);
+
+  if (existingItem) {
+    existingItem.quantity -= 1;
+    if (existingItem.quantity <= 0) {
+
+      cart.items.splice(itemIndex, 1);
+      console.log(cart);
+    }
+  }
+
+  await writeCarts(carts);
+
+  res.json({ message: "Removed to cart", cart });
 }

@@ -1,11 +1,8 @@
-// Sample product data (replace with backend/API data)
 
 window.addEventListener("DOMContentLoaded", () => {
-  // --- Check login state ---
   const userData = localStorage.getItem("user");
 
   if (!userData) {
-    // User not logged in
     document.getElementById("header-profile").hidden = true;
     document.getElementById("header-cart").hidden = true;
     document.getElementById("header-logout").hidden = true;
@@ -45,6 +42,10 @@ async function fetchProducts() {
   }
 }
 
+function to(pid) {
+window.location.href = `/product?id=${pid}`
+}
+
 async function renderProducts() {
   const grid = document.getElementById("productGrid");
   grid.innerHTML = "";
@@ -58,9 +59,9 @@ console.log("Fetched products:", list);
     const card = document.createElement("div");
     card.classList.add("product-card");
     card.innerHTML = `
-      <img src="${p.image}" alt="${p.name}">
+      <img onclick="to('${p.id}')" src="${p.image}" alt="${p.name}">
       <div class="product-info">
-        <h3>${p.name}</h3>
+        <h3 onclick="to('${p.id}')" >${p.name}</h3>
         <p class="price">₹${p.price.toFixed(2)}</p>
         <button onclick="addToCart('${p.id}')">Add to Cart</button>
       </div>
@@ -69,7 +70,6 @@ console.log("Fetched products:", list);
   });
 }
 
-// --- SEARCH FUNCTION ---
 function handleSearch() {
   const query = document
     .getElementById("searchInput")
