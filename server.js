@@ -2,6 +2,8 @@ import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
 import * as uAuth from "./src/userAuth.js";
+import * as cart from "./src/cartService.js";
+import * as products from './src/productService.js'
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -38,7 +40,8 @@ app.get('/product', (req, res) => {
 
 app.post('/api/auth/login', uAuth.login);
 app.post('/api/auth/register', uAuth.register);
-
+app.post('/api/cart/add', cart.addToCart);
+app.post('/api/products', products.getAllProducts)
 
 app.get(/.*/, (req, res) => {
   res.sendFile(path.join(__dirname, "views", "error404.html"));

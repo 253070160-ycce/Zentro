@@ -1,0 +1,44 @@
+[
+  {
+    "id": "P-101",
+    "name": "Wireless Bluetooth Earbuds",
+    "price": 2499,
+    "image": "assets/products/earbuds.png",
+    "category": "audio"
+  },
+  {
+    "id": "P-203",
+    "name": "Smartwatch Series 5",
+    "price": 8999,
+    "image": "assets/products/smartwatch.png",
+    "category": "wearables"
+  },
+  {
+    "id": "P-305",
+    "name": "Phone Case (Black Matte)",
+    "price": 399,
+    "image": "assets/products/phonecase.png",
+    "category": "accessories"
+  },
+  {
+    "id": "P-412",
+    "name": "Noise Cancelling Headphones",
+    "price": 7499,
+    "image": "assets/products/headphones.png",
+    "category": "audio"
+  },
+  {
+    "id": "P-520",
+    "name": "4K Smart TV 43\"",
+    "price": 34999,
+    "image": "assets/products/tv.png",
+    "category": "electronics"
+  },
+  {
+    "id": "P-601",
+    "name": "Gaming Mouse RGB",
+    "price": 1299,
+    "image": "assets/products/mouse.png",
+    "category": "accessories"
+  }
+]

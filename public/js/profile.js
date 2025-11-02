@@ -16,8 +16,6 @@ const defaultProfile = {
   lastName: "Doe",
   email: "john.doe@example.com",
   phone: "+1 234 567 8900",
-  dob: "1990-01-15",
-  bio: "Passionate online shopper and tech enthusiast.",
 };
 
 function loadProfile() {
@@ -27,8 +25,6 @@ function loadProfile() {
   document.getElementById("last-name").value = data.lastName;
   document.getElementById("email").value = data.email;
   document.getElementById("phone").value = data.phone;
-  document.getElementById("dob").value = data.dob;
-  document.getElementById("bio").value = data.bio;
 
   document.getElementById("profile-name").textContent =
     data.firstName + " " + data.lastName;
@@ -41,8 +37,6 @@ function saveProfile() {
     lastName: document.getElementById("last-name").value.trim(),
     email: document.getElementById("email").value.trim(),
     phone: document.getElementById("phone").value.trim(),
-    dob: document.getElementById("dob").value,
-    bio: document.getElementById("bio").value.trim(),
   };
 
   if (!profile.firstName || !profile.lastName)
@@ -57,9 +51,7 @@ function saveProfile() {
 
 document.getElementById("save-btn").addEventListener("click", saveProfile);
 document.getElementById("cancel-btn").addEventListener("click", loadProfile);
-document.getElementById("edit-pic-btn").addEventListener("click", () => {
-  alert("Profile picture upload feature coming soon!");
-});
+
 
 const recentOrders = [
   {

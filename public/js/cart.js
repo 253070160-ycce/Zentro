@@ -24,6 +24,11 @@ let cart = [
 ];
 
 window.addEventListener("DOMContentLoaded", () => {
+    const userData = localStorage.getItem("user");
+
+  if (!userData) {
+      window.location.href = "/login";
+  }
   renderCart();
   updateSummary();
   document.getElementById("checkoutBtn").addEventListener("click", checkout);
