@@ -1,4 +1,3 @@
-// -------- TAB SWITCHING --------
 const tabs = document.querySelectorAll(".tab");
 const tabContents = document.querySelectorAll(".tab-content");
 
@@ -31,7 +30,6 @@ function loadProfile() {
   document.getElementById("dob").value = data.dob;
   document.getElementById("bio").value = data.bio;
 
-  // update display header
   document.getElementById("profile-name").textContent =
     data.firstName + " " + data.lastName;
   document.getElementById("profile-email").textContent = data.email;
@@ -57,14 +55,12 @@ function saveProfile() {
   alert("Profile updated successfully!");
 }
 
-// -------- EVENT LISTENERS --------
 document.getElementById("save-btn").addEventListener("click", saveProfile);
 document.getElementById("cancel-btn").addEventListener("click", loadProfile);
 document.getElementById("edit-pic-btn").addEventListener("click", () => {
   alert("Profile picture upload feature coming soon!");
 });
 
-// -------- SIMULATED DATA (recent orders + addresses) --------
 const recentOrders = [
   {
     id: "#12345",
@@ -142,7 +138,6 @@ function renderAddresses() {
     .join("");
 }
 
-// -------- INIT --------
 window.addEventListener("DOMContentLoaded", () => {
   loadProfile();
   renderOrders();

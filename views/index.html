@@ -2,23 +2,36 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Zentro</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zentro - Home</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/index.css">
 </head>
 <body>
-  <div class="header">
-    <div class="logo">🛒 Zentro</div>
+  
+  <header class="main-header">
+    <div class="logo">Zentro</div>
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="Search for products..." />
+      <button id="searchBtn">🔍</button>
+    </div>
     <nav class="nav-links">
-      <a href="/">Home</a>
-      <a href="#">Shop</a>
-      <a href="#">Orders</a>
-      <a href="#">Profile</a>
+      <a href="profile">Profile</a>
+      <a href="cart">Cart</a>
     </nav>
-  </div>
+  </header>
 
-    <h1>Welcome to Zentro</h1>
-  <button id="load">Load Products</button>
-  <ul id="list"></ul>
-  <script src="js/main.js"></script>
+  <section class="hero">
+    <img src="assets/hero.png" alt="">
+  </section>
+
+  <main class="product-section">
+    <h2>Featured Products</h2>
+    <div id="productGrid" class="product-grid">
+      <!-- Products injected by JS -->
+    </div>
+  </main>
+
+  <script src="js/index.js"></script>
 </body>
 </html>

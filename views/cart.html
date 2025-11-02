@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shopping Cart</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/cart.css">
+</head>
+<body>
+  <header class="main-header">
+    <div class="logo">Zentro</div>
+
+    <nav class="nav-links">
+      <a href="/">Home</a>
+      <a href="profile">Profile</a>
+    </nav>
+  </header>
+
+  <main class="cart-container">
+    <section class="cart-items" id="cartItems">
+      <!-- Items will render here -->
+    </section>
+
+    <aside class="cart-summary">
+      <h2>Order Summary</h2>
+      <div class="summary-row">
+        <span>Subtotal</span>
+        <span id="subtotal">₹0.00</span>
+      </div>
+      <div class="summary-row">
+        <span>Shipping</span>
+        <span id="shipping">₹0.00</span>
+      </div>
+      <hr>
+      <div class="summary-row total">
+        <strong>Total</strong>
+        <strong id="total">₹0.00</strong>
+      </div>
+      <button id="checkoutBtn">Proceed to Checkout</button>
+    </aside>
+  </main>
+
+  <script src="js/cart.js"></script>
+</body>
+</html>

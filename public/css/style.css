@@ -5,3 +5,50 @@
   --gray: #e5e5e5;
   --font: system-ui;
 }
+/* Header */
+.main-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--accent);
+  padding: 1em 2em;
+  color: #fff;
+}
+
+.logo {
+  font-weight: 700;
+  font-size: 1.4em;
+}
+
+.search-bar {
+  display: flex;
+  flex: 1;
+  max-width: 500px;
+  margin: 0 2em;
+}
+
+.search-bar input {
+  flex: 1;
+  padding: 0.5em 1em;
+  border: none;
+  border-radius: 6px 0 0 6px;
+  outline: none;
+}
+
+.search-bar button {
+  background: #005fcc;
+  border: none;
+  padding: 0.5em 1em;
+  border-radius: 0 6px 6px 0;
+  color: #fff;
+  cursor: pointer;
+}
+.search-bar button:hover { background: #004ba3; }
+
+.nav-links a {
+  color: #fff;
+  text-decoration: none;
+  margin-left: 1.5em;
+  font-weight: 500;
+}
+.nav-links a:hover { text-decoration: underline; }

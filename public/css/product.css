@@ -1,0 +1,151 @@
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  margin: 0;
+}
+
+.main-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--accent);
+  color: white;
+  padding: 1em 2em;
+}
+
+.main-header a {
+  color: white;
+  text-decoration: none;
+}
+
+.product-details {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1000px;
+  margin: 3em auto;
+  padding: 1em;
+  gap: 2em;
+}
+
+.product-image {
+  flex: 1 1 300px;
+}
+
+.product-image img {
+  width: 100%;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.product-info {
+  flex: 2 1 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.product-info h1 {
+  font-size: 1.8em;
+  margin: 0;
+}
+
+.product-info .price {
+  font-size: 1.4em;
+  font-weight: bold;
+  color: var(--accent);
+}
+
+.product-info p {
+  line-height: 1.5em;
+  color: #444;
+}
+
+.quantity-control {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.quantity-control button {
+  width: 32px;
+  height: 32px;
+  background: var(--gray);
+  border: none;
+  border-radius: 6px;
+  font-size: 1.2em;
+  cursor: pointer;
+}
+
+.quantity-control input {
+  width: 50px;
+  text-align: center;
+  border: 1px solid var(--gray);
+  border-radius: 6px;
+  padding: 0.3em;
+}
+
+.add-to-cart {
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 0.8em 1.5em;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 1em;
+  cursor: pointer;
+  width: fit-content;
+}
+.add-to-cart:hover { background: #005fcc; }
+
+.related-section {
+  max-width: 1200px;
+  margin: 3em auto;
+  padding: 0 1em;
+}
+.related-section h2 {
+  margin-bottom: 1.5em;
+}
+
+.related-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5em;
+}
+
+.related-card {
+  border: 1px solid var(--gray);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+  background: #fff;
+}
+
+.related-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.related-card img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+}
+
+.related-info {
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3em;
+}
+
+.related-info h3 {
+  margin: 0;
+  font-size: 1em;
+}
+
+.related-info .price {
+  color: var(--accent);
+  font-weight: 700;
+}

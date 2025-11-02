@@ -1,6 +1,7 @@
 import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
+import * as uAuth from "./src/userAuth.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -28,6 +29,17 @@ app.get('/login', (req, res) => {
 app.get('/profile', (req, res) => {
   res.sendFile(path.join(__dirname, "views", "profile.html"));
 });
+app.get('/cart', (req, res) => {
+  res.sendFile(path.join(__dirname, "views", "cart.html"));
+});
+app.get('/product', (req, res) => {
+  res.sendFile(path.join(__dirname, "views", "product.html"));
+});
+
+app.post('/api/auth/login', uAuth.login);
+app.post('/api/auth/register', uAuth.register);
+
+
 app.get(/.*/, (req, res) => {
   res.sendFile(path.join(__dirname, "views", "error404.html"));
 });
