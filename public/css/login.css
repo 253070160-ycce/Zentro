@@ -1,9 +1,18 @@
 body {
-    background: url("/assets/loginBG.jpg") no-repeat center center / cover;
-  
+  background: url("/assets/loginBG.jpg") no-repeat center center / cover;
   display: flex;
+  color: var(--text);
+  font-family: var(--font);
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
 h2 {
   text-align: center;
@@ -70,7 +79,14 @@ button:hover {
   display: none;
 }
 
-
-    .hidden { display: none; }
-    .error { color: red; font-size: 0.9em; margin-top: 5px; }
-    input.invalid { border-color: red; }
+.hidden {
+  display: none;
+}
+.error {
+  color: red;
+  font-size: 0.9em;
+  margin-top: 5px;
+}
+input.invalid {
+  border-color: red;
+}

@@ -5,19 +5,3 @@
   --gray: #e5e5e5;
   --font: system-ui;
 }
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  color: var(--text);
-  font-family: var(--font);
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
-
