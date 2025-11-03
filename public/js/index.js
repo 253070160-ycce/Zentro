@@ -1,5 +1,5 @@
 
-window.addEventListener("DOMContentLoaded", () => {
+window.addEventListener("DOMContentLoaded", async () => {
   const userData = localStorage.getItem("user");
 
   if (!userData) {
@@ -17,7 +17,7 @@ document.getElementById("header-logout").addEventListener("click", (e) => {
       window.location.href = "/login";
 });
 
-  renderProducts();
+  renderProducts(await fetchProducts());
   document.getElementById("searchBtn").addEventListener("click", handleSearch);
   document.getElementById("searchInput").addEventListener("keyup", (e) => {
     if (e.key === "Enter") handleSearch();
@@ -46,10 +46,9 @@ function to(pid) {
 window.location.href = `/product?id=${pid}`
 }
 
-async function renderProducts() {
+async function renderProducts(list) {
   const grid = document.getElementById("productGrid");
   grid.innerHTML = "";
-  list = await fetchProducts();
   if (list.length === 0) {
     grid.innerHTML = `<p>No products found.</p>`;
     return;
@@ -70,16 +69,17 @@ console.log("Fetched products:", list);
   });
 }
 
-function handleSearch() {
+async function handleSearch() {
   const query = document
     .getElementById("searchInput")
     .value.trim()
     .toLowerCase();
-  const filtered = products.filter(
+  const filtered = (await fetchProducts()).filter(
     (p) =>
       p.name.toLowerCase().includes(query) ||
       p.category.toLowerCase().includes(query)
   );
+  console.log(filtered);
   renderProducts(filtered);
 }
 

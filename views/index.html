@@ -1,39 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Zentro - Home</title>
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/index.css">
-</head>
-<body>
-  
-  <header class="main-header">
-    <div class="logo">Zentro</div>
-    <div class="search-bar">
-      <input type="text" id="searchInput" placeholder="Search for products..." />
-      <button id="searchBtn">🔍</button>
-    </div>
-    <nav class="nav-links">
-      <a id="header-profile" href="profile">Profile</a>
-      <a id="header-cart" href="cart">Cart</a>
-      <a id="header-logout" href="#">Logout</a>
-      <a id="header-login" href="login" hidden>Login</a>
-    </nav>
-  </header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Zentro - Home</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/index.css" />
+  </head>
+  <body>
+    <header class="main-header">
+      <div class="logo">Zentro</div>
+      <div class="search-bar">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search for products..."
+        />
+        <button id="searchBtn">🔍</button>
+      </div>
+      <nav class="nav-links">
+        <a id="header-profile" href="profile">Profile</a>
+        <a id="header-cart" href="cart">Cart</a>
+        <a id="header-logout" href="#">Logout</a>
+        <a id="header-login" href="login" hidden>Login</a>
+      </nav>
+    </header>
 
-  <section class="hero">
-    <img src="assets/hero.png" alt="">
-  </section>
+    <section class="hero">
+      <img src="assets/hero.png" alt="" />
+    </section>
 
-  <main class="product-section">
-    <h2>Products</h2>
-    <div id="productGrid" class="product-grid">
-      <!-- Products injected by JS -->
-    </div>
-  </main>
+    <main class="product-section">
+      <h2>Products</h2>
+      <div id="productGrid" class="product-grid">
+        <!-- Products injected by JS -->
+      </div>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-content">
+        <div class="footer-section about">
+          <h3>ShopSmart</h3>
+          <p>
+            Your go-to place for affordable tech, gadgets, and accessories —
+            delivered fast.
+          </p>
+        </div>
 
-  <script src="js/index.js"></script>
-</body>
+        <div class="footer-section links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/products">Shop</a></li>
+            <li><a href="/cart">Cart</a></li>
+            <li><a href="/profile">Profile</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section contact">
+          <h4>Contact Us</h4>
+          <p>Email: support@shopsmart.com</p>
+          <p>Phone: +91 98765 43210</p>
+        </div>
+
+        <div class="footer-section socials">
+          <h4>Follow Us</h4>
+          <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2025 ShopSmart. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script src="js/index.js"></script>
+  </body>
 </html>

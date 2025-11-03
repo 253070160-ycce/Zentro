@@ -106,3 +106,64 @@ body {
   .search-bar { margin: 1em 0; }
   .main-header { flex-direction: column; gap: 1em; }
 }
+
+
+.site-footer {
+  background: #111;
+  color: #ddd;
+  padding: 40px 0 20px;
+  font-family: "Poppins", sans-serif;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 30px;
+  padding: 0 10%;
+}
+
+.footer-section h3,
+.footer-section h4 {
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.footer-section p,
+.footer-section ul,
+.footer-section a {
+  color: #bbb;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-section ul li {
+  margin: 6px 0;
+}
+
+.footer-section a:hover {
+  color: #fff;
+}
+
+.social-icons a {
+  color: #bbb;
+  margin-right: 10px;
+  font-size: 18px;
+  transition: color 0.2s;
+}
+
+.social-icons a:hover {
+  color: #fff;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 20px;
+  border-top: 1px solid #333;
+  font-size: 13px;
+  color: #888;
+}
